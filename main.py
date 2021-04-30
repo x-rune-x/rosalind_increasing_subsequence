@@ -5,10 +5,10 @@ def longest_subsequence(start_position, permutation):
     else:
         for i in permutation:
             current_subsequence = [i]
-            for j in range(len(permutation)):
+            for j in range(start_position, len(permutation)):
                 if permutation[j] > current_subsequence[-1]:
                     current_subsequence.append(permutation[j])
-                    longest_subsequence(j, permutation)
+                    longest_subsequence(i, permutation)
             subsequences.append(current_subsequence)
 
 
