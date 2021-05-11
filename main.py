@@ -1,15 +1,21 @@
-def increasing_subsequence(permutation, subsequences):
-    if len(permutation) == 1:
-        return permutation
-    else:
-        for i in range(len(permutation)):
-            larger_numbers = []
-            for j in range(i+1, len(permutation)):
-                if j > i:
-                    larger_numbers.append(j)
-                increasing_subsequence(larger_numbers, subsequences)
-            subsequences.append(larger_numbers)
-    return max(subsequences, key=len)
+def increasing_subsequence(permutation):
+    subsequences = []
+    for i in range(len(permutation)):
+        for j in range(len(permutation)-1, i, -1):
+            subsequences.append([permutation[i]] + permutation[j:])
+            for k in range(j-1, i, -1):
+                subsequences.append([permutation[i]] + permutation[k:j])
+
+    for x in range(len(subsequences)):
+        print(x)
+        sub = subsequences[x]
+        print(sub)
+        for pos in range(len(sub)-1):
+            if sub[pos] > sub[pos+1]:
+                subsequences[x] = ''
+
+    return subsequences
 
 
-print(increasing_subsequence([9, 1, 6, 2, 5, 7, 4, 8, 3], []))
+f = increasing_subsequence([9, 1, 6, 2, 5, 7, 4, 8, 3])
+print(f)
